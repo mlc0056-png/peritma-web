@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <!-- El "bocadillo" de notificación (Arriba a la derecha) -->
+    <!-- La notificación de éxito -->
     <div id="notificacion" class="bocadillo">
         <p>Su solicitud ha sido enviada correctamente, en breves nos pondremos en contacto con usted.</p>
     </div>
@@ -60,7 +60,7 @@
         <section id="contacto">
             <h2>Contacto</h2>
             <div class="form-container">
-                <!-- He quitado el action de php y añadido un id para el JavaScript -->
+                <!-- Campos del formulario -->
                 <form id="miFormulario">
                     <label>Nombre Completo *</label>
                     <input type="text" placeholder="Ej. Ana García" required>
@@ -90,7 +90,7 @@
         <p>PERITMA &copy; 2026 | DERECHO DIGITAL Y PERITAJE INFORMÁTICO | SERVICIO TECNOLÓGICO | MADRID</p>
     </footer>
 
-    <!-- Script para hacer saltar el bocadillo sin PHP -->
+    <!-- Script para hacer saltar la notificación de éxito -->
     <script>
         document.getElementById('miFormulario').onsubmit = function(e) {
             e.preventDefault(); // Evita que la página se recargue

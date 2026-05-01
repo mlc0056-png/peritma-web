@@ -1,3 +1,4 @@
+/* VARIABLES DE COLOR */
 :root {
     --fondo: #fdfaf5;
     --nude: #e9e0d2;
@@ -6,47 +7,204 @@
     --blanco: #ffffff;
 }
 
-/* RESET Y TAMAÑOS (Los que te gustaban) */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', sans-serif; background-color: var(--fondo); color: var(--chocolate); line-height: 1.8; }
-h1, h2, h3, .logo-text { font-family: 'Playfair Display', serif; }
+/* RESET Y CONFIGURACIÓN BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* HEADER Y LOGO */
-header { background-color: rgba(253, 250, 245, 0.9); padding: 25px 5%; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--nude); }
-nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; }
-.logo-img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
-.logo-text { font-size: 1.5rem; letter-spacing: 2px; color: var(--taupe); margin-left: 10px; }
-.brand { display: flex; align-items: center; }
-nav ul { display: flex; list-style: none; }
-nav ul li { margin-left: 30px; }
-nav ul li a { text-decoration: none; color: var(--chocolate); font-size: 0.8rem; text-transform: uppercase; }
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--fondo);
+    color: var(--chocolate);
+    line-height: 1.8;
+}
 
-/* HERO Y BOTÓN */
-.hero { height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(rgba(253, 250, 245, 0.4), rgba(253, 250, 245, 0.4)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1600'); background-size: cover; background-position: center; }
-.hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
-.btn-hero { background-color: var(--taupe); color: var(--blanco); padding: 16px 40px; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; display: inline-block; }
+/* Tipografía para títulos */
+h1, h2, h3, .logo-text {
+    font-family: 'Playfair Display', serif;
+}
 
-/* SERVICIOS */
-section { padding: 100px 5%; max-width: 1200px; margin: auto; }
-h2 { text-align: center; font-size: 2.2rem; margin-bottom: 60px; }
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-.card { background: var(--blanco); padding: 50px 30px; text-align: center; border: 1px solid var(--nude); }
+/* HEADER Y NAVEGACIÓN */
+header {
+    background-color: rgba(253, 250, 245, 0.9);
+    padding: 25px 5%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--nude);
+    backdrop-filter: blur(5px); /* Efecto cristal opcional */
+}
 
-/* LA FIRMA */
-.firma { background-color: var(--nude); text-align: center; max-width: 100%; }
-.container-small { max-width: 800px; margin: auto; }
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+}
 
-/* FORMULARIO */
-.form-container { max-width: 600px; margin: auto; }
-input, select, textarea { width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid var(--nude); font-family: inherit; }
-label { display: block; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 5px; color: var(--taupe); font-weight: bold; }
-.btn-submit { width: 100%; background-color: var(--taupe); color: var(--blanco); border: none; padding: 15px; cursor: pointer; letter-spacing: 2px; }
+.brand {
+    display: flex;
+    align-items: center;
+}
 
-/* ESTILO DEL BOCADILLO (NOTIFICACIÓN) */
+.logo-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    color: var(--taupe);
+    margin-left: 10px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--chocolate);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--taupe);
+}
+
+/*  BANNER INICIAL */
+.hero {
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(rgba(253, 250, 245, 0.4), rgba(253, 250, 245, 0.4)), 
+                url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1600');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.btn-hero {
+    background-color: var(--taupe);
+    color: var(--blanco);
+    padding: 12px 30px;
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    display: inline-block;
+    transition: opacity 0.3s;
+}
+
+.btn-hero:hover {
+    opacity: 0.9;
+}
+
+/* SERVICIOS (GRID DE TARJETAS) */
+section {
+    padding: 100px 5%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 60px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.card {
+    background: var(--blanco);
+    padding: 50px 30px;
+    text-align: center;
+    border: 1px solid var(--nude);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* LA FIRMA (TEXTO CENTRADO) */
+.firma {
+    background-color: var(--nude);
+    text-align: center;
+    max-width: 100%;
+}
+
+.container-small {
+    max-width: 800px;
+    margin: auto;
+}
+
+/* FORMULARIO DE CONTACTO */
+.form-container {
+    max-width: 600px;
+    margin: auto;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid var(--nude);
+    font-family: inherit;
+    background-color: white;
+}
+
+label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    color: var(--taupe);
+    font-weight: bold;
+}
+
+.btn-submit {
+    width: 100%;
+    background-color: var(--taupe);
+    color: var(--blanco);
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+.btn-submit:hover {
+    opacity: 0.9;
+}
+
+/* SISTEMA DE NOTIFICACIÓN */
 .bocadillo {
     position: fixed;
     top: 30px;
-    right: -400px; /* Escondido a la derecha */
+    right: -400px; /* Inicialmente fuera de pantalla */
     width: 300px;
     background-color: var(--chocolate);
     color: var(--blanco);
@@ -55,15 +213,17 @@ label { display: block; font-size: 0.7rem; text-transform: uppercase; margin-bot
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     z-index: 2000;
-    transition: right 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Animación de rebote */
+    /* Transición con efecto elástico */
+    transition: right 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
     font-size: 0.9rem;
 }
 
+/* Clase que se activa mediante JavaScript */
 .bocadillo.mostrar {
-    right: 30px; /* Aparece en pantalla */
+    right: 30px;
 }
 
-/* Flechita del bocadillo (Opcional, para que parezca un mensaje) */
+/* Triangulito decorativo del bocadillo */
 .bocadillo::after {
     content: '';
     position: absolute;
@@ -74,7 +234,28 @@ label { display: block; font-size: 0.7rem; text-transform: uppercase; margin-bot
     border-bottom: 12px solid var(--chocolate);
 }
 
-footer { padding: 50px; text-align: center; background-color: var(--chocolate); color: var(--nude); font-size: 0.7rem; }
+/* FOOTER */
+footer {
+    padding: 50px;
+    text-align: center;
+    background-color: var(--chocolate);
+    color: var(--nude);
+    font-size: 0.7rem;
+}
 
-@media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+/* RESPONSIVE DESIGN (ADAPTACIÓN MÓVIL) */
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+}
