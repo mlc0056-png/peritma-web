@@ -9,10 +9,15 @@
 </head>
 <body>
 
-    <!-- La notificación de éxito -->
     <div id="notificacion" class="bocadillo">
         <p>Su solicitud ha sido enviada correctamente, en breves nos pondremos en contacto con usted.</p>
     </div>
+
+    <?php if(isset($_GET['error']) && $_GET['error'] == 'ocupado'): ?>
+    <div class="bocadillo" style="background-color: #d9534f; display: block; opacity: 1; visibility: visible;">
+        <p>Lo sentimos, esa hora ya está reservada. Por favor, elija otra.</p>
+    </div>
+    <?php endif; ?>
 
     <header>
         <nav>
@@ -24,7 +29,7 @@
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#nosotros">La Firma</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#contacto">Contacto & Cita Previa</a></li>
             </ul>
         </nav>
     </header>
@@ -54,22 +59,24 @@
             <div class="container-small">
                 <h2>La Firma</h2>
                 <p>En PeritMA creemos que la tecnología no debe ser una barrera para la justicia. Nuestra misión fundamental es analizar información técnica compleja y traducirla a un lenguaje judicial claro y comprensible.</p>
-            </div>
+            </div> 
         </section>
 
         <section id="contacto">
-            <h2>Contacto</h2>
+            <h2>Contacto y Cita Previa</h2>
             <div class="form-container">
-                <!-- Campos del formulario -->
-                <form id="miFormulario">
+                <form id="miFormulario" action="procesar.php" method="POST">
                     <label>Nombre Completo *</label>
-                    <input type="text" placeholder="Ej. Ana García" required>
+                    <input type="text" name="nombre" placeholder="Ej. Ana García" required>
 
                     <label>Correo Electrónico *</label>
-                    <input type="email" placeholder="nombre@ejemplo.com" required>
+                    <input type="email" name="email" placeholder="nombre@ejemplo.com" required>
+
+                    <label>Teléfono de Contacto *</label>
+                    <input type="tel" name="telefono" placeholder="Ej. 600000000" required>
 
                     <label>Motivo de la consulta *</label>
-                    <select required>
+                    <select name="motivo" required>
                         <option value="" disabled selected>Seleccione una opción...</option>
                         <option value="peritaje">Peritaje Judicial</option>
                         <option value="forense">Análisis Forense</option>
@@ -78,9 +85,17 @@
                     </select>
 
                     <label>¿En qué podemos ayudarle? (Opcional)</label>
-                    <textarea rows="5" placeholder="Cuéntenos su caso..."></textarea>
+                    <textarea name="mensaje" rows="5" placeholder="Cuéntenos su caso..."></textarea>
+
+                    <label>Seleccione el día (Opcional para cita presencial)</label>
+                    <input type="date" name="fecha_cita" id="fecha_cita" min="<?php echo date('Y-m-d'); ?>">
+
+                    <label>Seleccione la hora (Opcional)</label>
+                    <select name="hora_cita" id="hora_cita">
+                        <option value="" selected>Solo consulta telefónica (Sin cita)</option>
+                    </select>
                     
-                    <button type="submit" class="btn-submit">ENVIAR CONSULTA</button>
+                    <button type="submit" class="btn-submit">ENVIAR SOLICITUD</button>
                 </form>
             </div>
         </section>
@@ -88,25 +103,54 @@
 
     <footer>
         <p>PERITMA &copy; 2026 | DERECHO DIGITAL Y PERITAJE INFORMÁTICO | SERVICIO TECNOLÓGICO | MADRID</p>
+        <p><a href="legal.php" style="color:white; text-decoration: underline;">Aviso Legal y Privacidad</a></p>
     </footer>
-
     
-    <!-- Script para hacer saltar la notificación de éxito -->
     <script>
-        document.getElementById('miFormulario').onsubmit = function(e) {
-            e.preventDefault(); // Evita que la página se recargue
-            
-            var bocadillo = document.getElementById('notificacion');
-            bocadillo.classList.add('mostrar'); // Muestra el mensaje
-            
-            this.reset(); // Limpia el formulario
+    // Lógica para el cambio de mensaje al seleccionar una hora
+    document.getElementById('hora_cita').addEventListener('change', function() {
+        var mensaje = document.getElementById('mensaje-cita');
+        if(this.value === "") {
+            mensaje.style.display = 'block';
+            mensaje.innerText = "Perfecto, nuestro equipo le llamará al número indicado.";
+        } else {
+            mensaje.style.display = 'block';
+            mensaje.innerText = "Cita presencial seleccionada: se confirmará el día y hora indicados.";
+        }
+    });
 
-            // Lo oculta automáticamente después de 5 segundos
-            setTimeout(function() {
-                bocadillo.classList.remove('mostrar');
-            }, 5000);
-        };
+    // Lógica para cargar horas disponibles
+    document.getElementById('fecha_cita').addEventListener('change', function() {
+        var fecha = this.value;
+        var selectHora = document.getElementById('hora_cita');
+
+        if(fecha) {
+            selectHora.innerHTML = '<option>Cargando horas disponibles...</option>';
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'obtener_horas.php?fecha=' + fecha, true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    selectHora.innerHTML = '<option value="" selected>Solo consulta telefónica (Sin cita)</option>' + xhr.responseText;
+                }
+            };
+            xhr.send();
+        } else {
+            selectHora.innerHTML = '<option value="" selected>Solo consulta telefónica (Sin cita)</option>';
+        }
+    });
     </script>
+
+    <?php if(isset($_GET['exito'])): ?>
+    <script>
+        window.onload = function() {
+            var msg = document.getElementById('notificacion');
+            if(msg) {
+                msg.classList.add('mostrar');
+                setTimeout(function() { msg.classList.remove('mostrar'); }, 5000);
+            }
+        }
+    </script>
+    <?php endif; ?>
 
 </body>
 </html>

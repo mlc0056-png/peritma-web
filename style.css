@@ -8,11 +8,17 @@
 }
 
 /* RESET Y CONFIGURACIÓN BASE */
-* {
+* { 
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+/* Para que se deslice la pantalla*/
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--fondo);
@@ -33,7 +39,7 @@ header {
     top: 0;
     z-index: 1000;
     border-bottom: 1px solid var(--nude);
-    backdrop-filter: blur(5px); /* Efecto cristal opcional */
+    backdrop-filter: blur(5px);
 }
 
 nav {
@@ -84,7 +90,7 @@ nav ul li a:hover {
     color: var(--taupe);
 }
 
-/*  BANNER INICIAL */
+/* BANNER INICIAL */
 .hero {
     height: 70vh;
     display: flex;
@@ -114,7 +120,7 @@ nav ul li a:hover {
 }
 
 .btn-hero:hover {
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
 /* SERVICIOS (GRID DE TARJETAS) */
@@ -148,7 +154,7 @@ h2 {
     transform: translateY(-5px);
 }
 
-/* LA FIRMA (TEXTO CENTRADO) */
+/* LA FIRMA */
 .firma {
     background-color: var(--nude);
     text-align: center;
@@ -193,17 +199,26 @@ label {
     cursor: pointer;
     letter-spacing: 2px;
     text-transform: uppercase;
-    transition: background-color 0.3s ease, opacity 0.3s ease;
-}
-.btn-submit:hover {
-    opacity: 0.9;
+    transition: all 0.3s ease;
 }
 
-/* SISTEMA DE NOTIFICACIÓN */
+.btn-submit:hover {
+    background-color: var(--chocolate); /* Efecto de color al pasar el mouse */
+    opacity: 1;
+}
+
+option:disabled {
+    background-color: #f2f2f2;
+    color: #a1a1a1;
+    font-style: italic;
+    cursor: not-allowed;
+}
+
+/* SISTEMA DE NOTIFICACIÓN (BOCADILLO) */
 .bocadillo {
     position: fixed;
     top: 30px;
-    right: -400px; /* Inicialmente fuera de pantalla */
+    right: -400px; 
     width: 300px;
     background-color: var(--chocolate);
     color: var(--blanco);
@@ -212,17 +227,14 @@ label {
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     z-index: 2000;
-    /* Transición con efecto elástico */
     transition: right 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
     font-size: 0.9rem;
 }
 
-/* Clase que se activa mediante JavaScript */
 .bocadillo.mostrar {
     right: 30px;
 }
 
-/* Triangulito decorativo del bocadillo */
 .bocadillo::after {
     content: '';
     position: absolute;
@@ -242,7 +254,7 @@ footer {
     font-size: 0.7rem;
 }
 
-/* RESPONSIVE DESIGN (ADAPTACIÓN MÓVIL) */
+/* RESPONSIVE */
 @media (max-width: 900px) {
     .grid {
         grid-template-columns: 1fr 1fr;
