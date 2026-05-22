@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fecha    = $_POST['fecha_cita'];
     $hora     = $_POST['hora_cita'];
 
-    // 1. Guardar siempre en Consultas (ahora con teléfono)
+    // 1. Guardar siempre en Consultas
     $sql = "INSERT INTO consultas (nombre, email, telefono, motivo, mensaje) 
             VALUES ('$nombre', '$email', '$telefono', '$motivo', '$mensaje')";
     mysqli_query($conexion, $sql);
