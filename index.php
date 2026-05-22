@@ -66,6 +66,7 @@
             <h2>Contacto y Cita Previa</h2>
             <div class="form-container">
                 <form id="miFormulario" action="procesar.php" method="POST">
+                    
                     <label>Nombre Completo *</label>
                     <input type="text" name="nombre" placeholder="Ej. Ana García" required>
 
